@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.skw.library.RecyclerViewLesports
+        android:id="@+id/recyclerview_grid_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_36px"
+        android:background="@color/color_ffffff"
+        android:clipToPadding="false"
+        android:padding="@dimen/dp_28px">
+
+    </com.skw.library.RecyclerViewLesports>
+</FrameLayout>

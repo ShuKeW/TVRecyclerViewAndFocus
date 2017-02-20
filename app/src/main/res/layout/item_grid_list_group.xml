@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_890px"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:tag="child">
+
+    <FrameLayout
+        android:id="@+id/item1"
+        style="@style/FocusStyle"
+        android:layout_width="@dimen/dp_430px"
+        android:layout_height="@dimen/dp_188px">
+
+        <ImageView
+            android:id="@+id/recommend_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/recommend_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_62px"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_title_lesports"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_15px"
+            android:paddingRight="@dimen/dp_15px"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/item2"
+        style="@style/FocusStyle"
+        android:layout_width="@dimen/dp_430px"
+        android:layout_height="@dimen/dp_188px"
+        android:layout_marginLeft="@dimen/dp_9px"
+        android:layout_toRightOf="@id/item1">
+
+        <ImageView
+            android:id="@+id/recommend_img2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/recommend_title2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_62px"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_title_lesports"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_15px"
+            android:paddingRight="@dimen/dp_15px"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rLayout"
+        android:layout_width="@dimen/dp_430px"
+        android:layout_height="@dimen/dp_188px"
+        android:layout_below="@id/item1"
+        android:layout_marginTop="@dimen/dp_20px"
+        android:tag="item">
+
+        <FrameLayout
+            android:id="@+id/item3"
+            style="@style/FocusStyle"
+            android:layout_width="@dimen/dp_210px"
+            android:layout_height="@dimen/dp_188px">
+
+            <ImageView
+                android:id="@+id/recommend_img3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/recommend_title3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_62px"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_title_lesports"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_15px"
+                android:paddingRight="@dimen/dp_15px"
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/sp_34px" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/item4"
+            style="@style/FocusStyle"
+            android:layout_width="@dimen/dp_210px"
+            android:layout_height="@dimen/dp_188px"
+            android:layout_marginLeft="@dimen/dp_10px"
+            android:layout_toRightOf="@id/item3">
+
+            <ImageView
+                android:id="@+id/recommend_img4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/recommend_title4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_62px"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_title_lesports"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_15px"
+                android:paddingRight="@dimen/dp_15px"
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/sp_34px" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/item5"
+        style="@style/FocusStyle"
+        android:layout_width="@dimen/dp_430px"
+        android:layout_height="@dimen/dp_188px"
+        android:layout_below="@id/item1"
+        android:layout_marginLeft="@dimen/dp_9px"
+        android:layout_marginTop="@dimen/dp_20px"
+        android:layout_toRightOf="@id/rLayout">
+
+        <ImageView
+            android:id="@+id/recommend_img5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/recommend_title5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_62px"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_title_lesports"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_15px"
+            android:paddingRight="@dimen/dp_15px"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+    </FrameLayout>
+</RelativeLayout>

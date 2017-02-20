@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FocusStyle"
+    android:layout_width="@dimen/dp_316px"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/recommend_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/recommend_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_62px"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_title_lesports"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_15px"
+        android:paddingRight="@dimen/dp_15px"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_34px" />
+</FrameLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_8a8a8a"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/tabContent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120px"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tab1"
+            style="@style/FocusStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="竖向Linear"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+
+        <TextView
+            android:id="@+id/tab2"
+            style="@style/FocusStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_24px"
+            android:layout_toRightOf="@id/tab1"
+            android:gravity="center"
+            android:text="横向Gride"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+
+        <TextView
+            android:id="@+id/tab3"
+            style="@style/FocusStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_24px"
+            android:layout_toRightOf="@id/tab2"
+            android:gravity="center"
+            android:text="横向PageGride"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+
+        <TextView
+            android:id="@+id/tab4"
+            style="@style/FocusStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_24px"
+            android:layout_toRightOf="@id/tab3"
+            android:gravity="center"
+            android:text="横向Grid diff span"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+
+        <TextView
+            android:id="@+id/tab5"
+            style="@style/FocusStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_24px"
+            android:layout_toRightOf="@id/tab4"
+            android:gravity="center"
+            android:text="中间焦点"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_34px" />
+
+    </RelativeLayout>
+
+    <com.skw.library.ViewPagerContainsHScorll
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

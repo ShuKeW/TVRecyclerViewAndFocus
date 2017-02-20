@@ -1,0 +1,61 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- dp -->
+    <dimen name="dp_186px">124dp</dimen>
+    <dimen name="dp_120px">80dp</dimen>
+    <dimen name="dp_36px">24dp</dimen>
+
+    <dimen name="corner_radius">6dp</dimen>
+    <dimen name="focus_stroke">2dp</dimen>
+
+    <dimen name="dp_150px">100dp</dimen>
+    <dimen name="dp_15px">10dp</dimen>
+    <dimen name="dp_10px">6.7dp</dimen>
+    <dimen name="dp_20px">13.4dp</dimen>
+    <dimen name="dp_9px">6dp</dimen>
+    <dimen name="dp_316px">210.7dp</dimen>
+    <dimen name="dp_241px">160.7dp</dimen>
+    <dimen name="dp_313px">208.7dp</dimen>
+    <dimen name="dp_238px">158.7dp</dimen>
+    <dimen name="dp_24px">16dp</dimen>
+    <dimen name="dp_28px">18.7dp</dimen>
+    <dimen name="dp_60px">40dp</dimen>
+    <dimen name="dp_12px">8dp</dimen>
+    <dimen name="dp_228px">152dp</dimen>
+    <dimen name="dp_188px">125.4dp</dimen>
+    <dimen name="dp_456px">304dp</dimen>
+    <dimen name="dp_402px">268dp</dimen>
+    <dimen name="dp_430px">286.7dp</dimen>
+    <dimen name="dp_210px">140dp</dimen>
+    <dimen name="dp_890px">593.4dp</dimen>
+    <dimen name="dp_480px">320dp</dimen>
+    <dimen name="dp_426px">284dp</dimen>
+    <dimen name="dp_420px">280dp</dimen>
+    <dimen name="dp_317px">211.4dp</dimen>
+
+    <dimen name="dp_265px">176.7dp</dimen>
+    <dimen name="dp_252px">168dp</dimen>
+    <dimen name="dp_744px">496dp</dimen>
+    <dimen name="dp_62px">41.4dp</dimen>
+
+    <dimen name="dp_438px">292dp</dimen>
+    <dimen name="dp_410px">273.4dp</dimen>
+    <dimen name="dp_1020px">680dp</dimen>
+    <dimen name="dp_90px">60dp</dimen>
+    <dimen name="dp_48px">32dp</dimen>
+    <dimen name="dp_312px">208dp</dimen>
+    <dimen name="dp_234px">156dp</dimen>
+    <dimen name="dp_486px">324dp</dimen>
+    <dimen name="dp_49px">32.6dp</dimen>
+    <dimen name="dp_310px">206.7dp</dimen>
+    <dimen name="dp_174px">116dp</dimen>
+    <dimen name="dp_868px">578.7dp</dimen>
+    <dimen name="dp_200px">133.4dp</dimen>
+
+
+    <!-- sp -->
+    <dimen name="sp_34px">22.7sp</dimen>
+</resources>

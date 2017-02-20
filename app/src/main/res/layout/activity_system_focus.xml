@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff50">
+
+    <Button
+        android:layout_width="@dimen/dp_316px"
+        android:layout_height="@dimen/dp_316px"
+        android:background="@color/color_ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_34px" />
+
+    <Button
+        android:layout_width="@dimen/dp_316px"
+        android:layout_height="@dimen/dp_316px"
+        android:layout_alignParentRight="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_34px" />
+    <!--android:background="@color/color_ffffff"-->
+
+    <TextView
+        android:layout_width="@dimen/dp_316px"
+        android:layout_height="@dimen/dp_316px"
+        android:layout_centerInParent="true"
+        android:background="@color/color_ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_34px" />
+
+    <TextView
+        android:layout_width="@dimen/dp_316px"
+        android:layout_height="@dimen/dp_316px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_34px" />
+
+    <TextView
+        android:layout_width="@dimen/dp_316px"
+        android:layout_height="@dimen/dp_316px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/color_ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_34px" />
+
+</RelativeLayout>

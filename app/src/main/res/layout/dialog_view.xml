@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:padding="@dimen/dp_90px">
+
+    <TextView
+        android:id="@+id/item1"
+        android:layout_width="@dimen/dp_241px"
+        android:layout_height="@dimen/dp_234px"
+        android:background="@color/color_0b83ef"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <TextView
+        android:id="@+id/item2"
+        android:layout_width="@dimen/dp_241px"
+        android:layout_height="@dimen/dp_234px"
+        android:layout_marginLeft="@dimen/dp_90px"
+        android:layout_toRightOf="@id/item1"
+        android:background="@color/color_0b83ef"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <TextView
+        android:id="@+id/item3"
+        android:layout_width="@dimen/dp_241px"
+        android:layout_height="@dimen/dp_234px"
+        android:layout_below="@id/item1"
+        android:layout_marginTop="@dimen/dp_90px"
+        android:background="@color/color_0b83ef"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+
+    <TextView
+        android:id="@+id/item4"
+        android:layout_width="@dimen/dp_241px"
+        android:layout_height="@dimen/dp_234px"
+        android:layout_below="@id/item1"
+        android:layout_marginLeft="@dimen/dp_90px"
+        android:layout_marginTop="@dimen/dp_90px"
+        android:layout_toRightOf="@id/item3"
+        android:background="@color/color_0b83ef"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+
+</RelativeLayout>

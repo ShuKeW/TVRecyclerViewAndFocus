@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="focus_type" type="id" />
+    <item name="focus_type_is_scale_anim" type="id" />
+    <item name="focus_type_is_translate" type="id" />
+    <item name="focus_effect_view" type="id" />
+
+</resources>

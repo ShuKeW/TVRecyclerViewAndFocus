@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="focus_poster_padding">1dp</dimen>
+    <dimen name="focus_normal_padding">1dp</dimen>
+
+    <dimen name="focus_tab_view_padding_h">8dp</dimen>
+    <dimen name="focus_tab_view_padding_v">6.7dp</dimen>
+
+    <dimen name="focus_stroke">3dp</dimen>
+
+    <dimen name="dimen_11dp">11dp</dimen>
+    <dimen name="dimen_13_33dp">13.33dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_6_5dp">6.5dp</dimen>
+    <dimen name="dimen_5_3dp">5.3dp</dimen>
+</resources>
