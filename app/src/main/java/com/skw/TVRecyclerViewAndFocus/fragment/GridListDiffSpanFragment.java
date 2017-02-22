@@ -30,7 +30,7 @@ import java.util.List;
 
 public class GridListDiffSpanFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
-	private String					TAG			= "GridListDiffSpanFragment";
+	private String					TAG			= "DiffSpanFragment";
 
 	private TVRecyclerView recyclerView;
 

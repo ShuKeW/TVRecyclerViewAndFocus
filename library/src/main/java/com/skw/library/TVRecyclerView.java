@@ -26,7 +26,7 @@ import com.skw.library.holder.RVHolder;
  */
 public class TVRecyclerView extends RecyclerView implements View.OnKeyListener {
 
-	private static final String	TAG							= "RecyclerViewLesports";
+	private static final String	TAG							= "TVRecyclerView";
 
 	/**
 	 * 当前获取焦点的view的position,这个位置是在当前显示的view中，而不是全局的

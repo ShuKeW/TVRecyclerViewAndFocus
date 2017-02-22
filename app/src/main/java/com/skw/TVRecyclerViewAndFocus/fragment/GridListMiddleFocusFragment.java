@@ -31,7 +31,7 @@ import java.util.List;
 
 public class GridListMiddleFocusFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
-	private String					TAG			= "GridListMiddleFocusFragment";
+	private String					TAG			= "MiddleFocusFragment";
 
 	private TVRecyclerViewMiddleFocus recyclerView;
 

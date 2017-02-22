@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
 
 public class PageTVRecyclerView extends TVRecyclerView {
 
-	private static final String				TAG				= "PageRecyclerViewLesports";
+	private static final String				TAG				= "PageTVRecyclerView";
 
 	private int								pageSize;
 
