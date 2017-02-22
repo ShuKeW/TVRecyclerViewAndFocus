@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.skw.library.PageRecyclerView
+    <com.skw.library.PageTVRecyclerView
         android:id="@+id/recyclerview_grid_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,5 +13,5 @@
         android:clipChildren="false"
         android:padding="@dimen/dp_28px">
 
-    </com.skw.library.PageRecyclerView>
+    </com.skw.library.PageTVRecyclerView>
 </FrameLayout>

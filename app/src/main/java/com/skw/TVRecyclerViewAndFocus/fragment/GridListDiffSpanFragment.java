@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.skw.TVRecyclerViewAndFocus.R;
 import com.skw.TVRecyclerViewAndFocus.adapter.GridPageHRVAdapter;
 import com.skw.TVRecyclerViewAndFocus.model.RecommendModel;
-import com.skw.library.RecyclerViewLesports;
+import com.skw.library.TVRecyclerView;
 import com.skw.library.decoration.DividerGridItemDecoration;
 
 import java.util.ArrayList;
@@ -28,11 +28,11 @@ import java.util.List;
  * @类描述 一句话说明这个类是干什么的
  */
 
-public class GridListDiffSpanFragment extends Fragment implements RecyclerViewLesports.OnLoadMoreListener {
+public class GridListDiffSpanFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
 	private String					TAG			= "GridListDiffSpanFragment";
 
-	private RecyclerViewLesports	recyclerView;
+	private TVRecyclerView recyclerView;
 
 	private GridLayoutManager		gridLayoutManager;
 
@@ -50,7 +50,7 @@ public class GridListDiffSpanFragment extends Fragment implements RecyclerViewLe
 	}
 
 	private void initView(View view) {
-		recyclerView = (RecyclerViewLesports) view.findViewById(R.id.recyclerview_grid_span);
+		recyclerView = (TVRecyclerView) view.findViewById(R.id.recyclerview_grid_span);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLastLineItemHandKey(true, false, true, false);
 		gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4, LinearLayoutManager.HORIZONTAL, false);

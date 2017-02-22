@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.skw.TVRecyclerViewAndFocus.R;
 import com.skw.TVRecyclerViewAndFocus.adapter.GridPageHRVAdapter;
 import com.skw.TVRecyclerViewAndFocus.model.RecommendModel;
-import com.skw.library.PageRecyclerView;
+import com.skw.library.PageTVRecyclerView;
 import com.skw.library.decoration.DividerGridItemDecoration;
 
 import java.util.ArrayList;
@@ -27,11 +27,11 @@ import java.util.List;
  * @类描述 一句话说明这个类是干什么的
  */
 
-public class GridPageFragment extends Fragment implements PageRecyclerView.OnPageChangeListener {
+public class GridPageFragment extends Fragment implements PageTVRecyclerView.OnPageChangeListener {
 
 	private String					TAG			= "GridPageFragment";
 
-	private PageRecyclerView		recyclerView;
+	private PageTVRecyclerView recyclerView;
 
 	private GridLayoutManager		gridLayoutManager;
 
@@ -51,7 +51,7 @@ public class GridPageFragment extends Fragment implements PageRecyclerView.OnPag
 	}
 
 	private void initView(View view) {
-		recyclerView = (PageRecyclerView) view.findViewById(R.id.recyclerview_grid_page);
+		recyclerView = (PageTVRecyclerView) view.findViewById(R.id.recyclerview_grid_page);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLastLineItemHandKey(true, false, true, false);
 		recyclerView.setPageSize(1792);

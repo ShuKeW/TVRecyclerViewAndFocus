@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.skw.TVRecyclerViewAndFocus.R;
 import com.skw.TVRecyclerViewAndFocus.adapter.GridListHRVAdapter;
 import com.skw.TVRecyclerViewAndFocus.model.RecommendModel;
-import com.skw.library.RecyclerViewLesports;
-import com.skw.library.RecyclerViewMiddleFocus;
+import com.skw.library.TVRecyclerView;
+import com.skw.library.TVRecyclerViewMiddleFocus;
 import com.skw.library.decoration.DividerGridItemDecoration;
 
 import java.util.ArrayList;
@@ -29,11 +29,11 @@ import java.util.List;
  * @类描述 一句话说明这个类是干什么的
  */
 
-public class GridListMiddleFocusFragment extends Fragment implements RecyclerViewLesports.OnLoadMoreListener {
+public class GridListMiddleFocusFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
 	private String					TAG			= "GridListMiddleFocusFragment";
 
-	private RecyclerViewMiddleFocus	recyclerView;
+	private TVRecyclerViewMiddleFocus recyclerView;
 
 	private GridLayoutManager		gridLayoutManager;
 
@@ -51,7 +51,7 @@ public class GridListMiddleFocusFragment extends Fragment implements RecyclerVie
 	}
 
 	private void initView(View view) {
-		recyclerView = (RecyclerViewMiddleFocus) view.findViewById(R.id.recyclerview_middle_focus);
+		recyclerView = (TVRecyclerViewMiddleFocus) view.findViewById(R.id.recyclerview_middle_focus);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLastLineItemHandKey(true, false, true, false);
 		gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4, LinearLayoutManager.HORIZONTAL, false);

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.skw.library.RecyclerViewLesports
+    <com.skw.library.TVRecyclerView
         android:id="@+id/recyclerview_grid_span"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,5 +16,5 @@
         android:paddingRight="@dimen/dp_60px"
         android:paddingTop="@dimen/dp_28px">
 
-    </com.skw.library.RecyclerViewLesports>
+    </com.skw.library.TVRecyclerView>
 </FrameLayout>

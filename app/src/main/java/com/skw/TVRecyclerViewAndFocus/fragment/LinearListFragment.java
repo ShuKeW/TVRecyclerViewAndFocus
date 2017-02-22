@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.skw.TVRecyclerViewAndFocus.R;
 import com.skw.TVRecyclerViewAndFocus.adapter.LinearListRVAdapter;
 import com.skw.TVRecyclerViewAndFocus.model.RecommendModel;
-import com.skw.library.RecyclerViewLesports;
+import com.skw.library.TVRecyclerView;
 import com.skw.library.decoration.DividerLinearItemDecoration;
 
 import java.util.ArrayList;
@@ -27,11 +27,11 @@ import java.util.List;
  * @类描述 一句话说明这个类是干什么的
  */
 
-public class LinearListFragment extends Fragment implements RecyclerViewLesports.OnLoadMoreListener {
+public class LinearListFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
 	private String					TAG			= "LinearListFragment";
 
-	private RecyclerViewLesports	recyclerView;
+	private TVRecyclerView recyclerView;
 
 	private LinearLayoutManager		linearLayoutManager;
 
@@ -53,7 +53,7 @@ public class LinearListFragment extends Fragment implements RecyclerViewLesports
 	}
 
 	private void initView(View view) {
-		recyclerView = (RecyclerViewLesports) view.findViewById(R.id.recyclerview_linear_list);
+		recyclerView = (TVRecyclerView) view.findViewById(R.id.recyclerview_linear_list);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLastLineItemHandKey(true, false, true, false);
 		linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);

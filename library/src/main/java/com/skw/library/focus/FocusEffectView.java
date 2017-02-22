@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewParent;
 
 import com.skw.library.R;
-import com.skw.library.RecyclerViewLesports;
+import com.skw.library.TVRecyclerView;
 
 /**
  * @创建人 weishukai
@@ -99,7 +99,7 @@ public class FocusEffectView extends AbsFocusEffectView {
 		 * 现在只做了一层处理，最好是给parent设置tag，表示是bringToFront的最终层
 		 */
 		ViewParent viewParent = currentFocusView.getParent();
-		if (viewParent != null && !(viewParent instanceof RecyclerViewLesports)) {
+		if (viewParent != null && !(viewParent instanceof TVRecyclerView)) {
 			currentFocusView.bringToFront();
 			((View) viewParent).postInvalidate();
 		}

@@ -17,7 +17,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 
 import com.skw.library.R;
-import com.skw.library.RecyclerViewLesports;
+import com.skw.library.TVRecyclerView;
 
 import java.lang.ref.WeakReference;
 
@@ -284,13 +284,13 @@ public abstract class AbsFocusEffectView extends View implements ViewTreeObserve
 		}
 
 		ViewParent viewParent = newFocus.getParent();
-		while (viewParent != null && !(viewParent instanceof RecyclerViewLesports)) {
+		while (viewParent != null && !(viewParent instanceof TVRecyclerView)) {
 			viewParent = viewParent.getParent();
 		}
 		if (viewParent != null) {
-			RecyclerViewLesports recyclerViewLesports = (RecyclerViewLesports) viewParent;
-			int focusOffsetX = recyclerViewLesports.getFocusItemOffsetX();
-			int focusOffsetY = recyclerViewLesports.getFocusItemOffsetY();
+			TVRecyclerView TVRecyclerView = (TVRecyclerView) viewParent;
+			int focusOffsetX = TVRecyclerView.getFocusItemOffsetX();
+			int focusOffsetY = TVRecyclerView.getFocusItemOffsetY();
 			newFocusEffectRect.offset(-focusOffsetX, -focusOffsetY);
 			if (focusOffsetX < 0) {// 左边超出了，向右滑
 				newFocusEffectRect.left = newFocusEffectRect.right - newFocus.getWidth();
@@ -302,9 +302,9 @@ public abstract class AbsFocusEffectView extends View implements ViewTreeObserve
 				newFocusEffectRect.bottom = newFocusEffectRect.top + newFocus.getHeight();
 			}
 
-			Log.d(TAG, "getNewFocusEffectScaleRect:" + recyclerViewLesports.getFocusItemOffsetX() + "  " + recyclerViewLesports.getFocusItemOffsetY());
-			recyclerViewLesports.setFocusItemOffsetX(0);
-			recyclerViewLesports.setFocusItemOffsetY(0);
+			Log.d(TAG, "getNewFocusEffectScaleRect:" + TVRecyclerView.getFocusItemOffsetX() + "  " + TVRecyclerView.getFocusItemOffsetY());
+			TVRecyclerView.setFocusItemOffsetX(0);
+			TVRecyclerView.setFocusItemOffsetY(0);
 		}
 
 		int widthAdd = Math.round((newFocus.getWidth() * scale - newFocus.getWidth()) / 2);
@@ -343,13 +343,13 @@ public abstract class AbsFocusEffectView extends View implements ViewTreeObserve
 		rect.bottom += heightAdd;
 
 		ViewParent viewParent = view.getParent();
-		while (viewParent != null && !(viewParent instanceof RecyclerViewLesports)) {
+		while (viewParent != null && !(viewParent instanceof TVRecyclerView)) {
 			viewParent = viewParent.getParent();
 		}
-		if (viewParent != null && viewParent instanceof RecyclerViewLesports) {
-			RecyclerViewLesports recyclerViewLesports = (RecyclerViewLesports) viewParent;
+		if (viewParent != null && viewParent instanceof TVRecyclerView) {
+			TVRecyclerView TVRecyclerView = (TVRecyclerView) viewParent;
 			Rect rectRecyclerView = new Rect();
-			recyclerViewLesports.getGlobalVisibleRect(rectRecyclerView);
+			TVRecyclerView.getGlobalVisibleRect(rectRecyclerView);
 			Log.d(TAG, "getGlobalVisibleRectOfDecorView    recyclerview：" + rectRecyclerView.toString());
 			if (rect.left < rectRecyclerView.left && rect.right > rectRecyclerView.left) {
 				rect.left = rectRecyclerView.left;
