@@ -11,7 +11,7 @@ Android TV 上使用的RecyclerView和焦点框架
     
     4、边缘按键拦截
     
-    ![image](https://github.com/ShuKeW/TVRecyclerViewAndFocus/blob/master/app/gif/tvrecyclerview.gif)
+    ![image](https://github.com/ShuKeW/TVRecyclerViewAndFocus/blob/master/screenshots/tvrecyclerview.gif)
     
 二、PageRecyclerView
 
