@@ -59,6 +59,7 @@ public class GridListFragment extends Fragment implements TVRecyclerView.OnLoadM
 		recyclerView.addItemDecoration(new DividerGridItemDecoration(Color.GRAY, 20, 20, Color.GREEN, 20));
 		pageNumber = 0;
 		createData(pageNumber);
+
 	}
 
 	@Override public void onCreate(@Nullable Bundle savedInstanceState) {

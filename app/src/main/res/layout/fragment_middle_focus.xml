@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tvrecyclerview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,9 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dp_62px"
         android:clipToPadding="false"
-        android:padding="@dimen/dp_20px">
+        android:padding="@dimen/dp_20px"
+        tvrecyclerview:drawChildOrderEnable="true"
+        tvrecyclerview:isNeedNotifyData="true">
 
     </com.skw.library.TVRecyclerViewMiddleFocus>
 </FrameLayout>

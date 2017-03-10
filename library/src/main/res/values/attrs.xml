@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TVRecyclerView">
+        <attr name="isNeedNotifyData" format="boolean" />
+        <attr name="drawChildOrderEnable" format="boolean" />
+        <attr name="handLastLeftKey" format="boolean" />
+        <attr name="handLastRightKey" format="boolean" />
+        <attr name="handLastUpKey" format="boolean" />
+        <attr name="handLastDownKey" format="boolean" />
+    </declare-styleable>
+</resources>

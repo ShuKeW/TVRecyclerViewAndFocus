@@ -1,6 +1,7 @@
 package com.skw.library;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.skw.library.focus.FocusEffectViewUtil;
 import com.skw.library.holder.RVHolder;
+
+import java.lang.ref.WeakReference;
 
 /**
  * @创建人 weishukai
@@ -39,12 +42,12 @@ public class TVRecyclerView extends RecyclerView {
      */
     private int currentFocusedItemPosition = -1;
 
-    private View nofityFocusView;
+    private WeakReference<View> nofityFocusView;
 
     /**
      * 获取焦点的view所在的item，可能他就是foucesView，可能他的child是focusView
      */
-    private View mFocusViewItem;
+    private WeakReference<View> mFocusViewItem;
 
     private Rect mFocusRect;
 
@@ -53,16 +56,24 @@ public class TVRecyclerView extends RecyclerView {
     private OnLoadMoreListener onLoadMoreListener;
 
     /**
-     * 最左边的view是否消耗掉按键，屏幕的上下左右
-     */
-    private boolean isLastLeftItemHandKey, isLastRightItemHandKey, isLastTopItemHandKey, isLastBottomItemHandKey;
-
-    /**
      * 获取焦点后要滚动的距离
      */
     protected int focusItemOffsetX = 0, focusItemOffsetY = 0;
 
     private AdapterDataObserver dataObserver;
+
+
+    /**
+     * 最左边的view是否消耗掉按键，屏幕的上下左右
+     */
+    private boolean isHandLastLeftKey, isHandLastRightKey, isHandLastUpKey, isHandLastDownKey;
+
+    private boolean isNotifyData;
+
+    /**
+     * 是否需要notifydata，如果需要则设为true，不需要就设为false，避免不需要notify的时候多余的操作
+     */
+    private boolean isNeedNotifyData;
 
     /**
      * 加载更多
@@ -74,21 +85,35 @@ public class TVRecyclerView extends RecyclerView {
 
     public TVRecyclerView(Context context) {
         super(context);
-        init(context);
+        init(context, null);
     }
 
     public TVRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context, attrs);
     }
 
     public TVRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
+        init(context, attrs);
     }
 
-    private void init(Context context) {
-        setChildrenDrawingOrderEnabled(true);
+    private void init(Context context, AttributeSet attrs) {
+        boolean drawChildOrder = false;
+        if (attrs != null) {
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TVRecyclerView, 0, 0);
+            try {
+                drawChildOrder = array.getBoolean(R.styleable.TVRecyclerView_drawChildOrderEnable, drawChildOrder);
+                isNeedNotifyData = array.getBoolean(R.styleable.TVRecyclerView_isNeedNotifyData, isNeedNotifyData);
+                isHandLastLeftKey = array.getBoolean(R.styleable.TVRecyclerView_handLastLeftKey, isHandLastLeftKey);
+                isHandLastRightKey = array.getBoolean(R.styleable.TVRecyclerView_handLastRightKey, isHandLastRightKey);
+                isHandLastUpKey = array.getBoolean(R.styleable.TVRecyclerView_handLastUpKey, isHandLastUpKey);
+                isHandLastDownKey = array.getBoolean(R.styleable.TVRecyclerView_handLastDownKey, isHandLastDownKey);
+            } finally {
+                array.recycle();
+            }
+        }
+        setChildrenDrawingOrderEnabled(drawChildOrder);
         /**
          * 每个方向给1像素的padding，防止下一个item还未显示，找不到下一个焦点
          */
@@ -98,29 +123,35 @@ public class TVRecyclerView extends RecyclerView {
         int paddingBottom = getPaddingBottom() == 0 ? 1 : getPaddingBottom();
         this.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
         // 去掉动画
-        this.setAnimation(null);
-        /**
-         * 设置可以获取焦点，当notify子view失去焦点是获取焦点，免得让焦点默认移动到别的view
-         */
-        setFocusable(true);
-        setFocusableInTouchMode(true);
-        setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
+        this.setItemAnimator(null);
+        if (isNeedNotifyData) {
+            /**
+             * 设置可以获取焦点，当notify子view失去焦点是获取焦点，免得让焦点默认移动到别的view
+             */
+            setFocusable(true);
+            setFocusableInTouchMode(true);
+            setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
 
-        dataObserver = new RVDataObservable();
+            dataObserver = new RVDataObservable();
+        }
 
     }
 
     @Override
     public void setAdapter(Adapter adapter) {
         Log.d(TAG, "setAdapter:" + adapter);
-        if (getAdapter() != null) {
-            getAdapter().unregisterAdapterDataObserver(dataObserver);
-            getAdapter().onDetachedFromRecyclerView(this);
-        }
-        super.setAdapter(adapter);
-        if (getAdapter() != null) {
-            getAdapter().registerAdapterDataObserver(dataObserver);
-            getAdapter().onAttachedToRecyclerView(this);
+        if (isNeedNotifyData) {
+            if (getAdapter() != null) {
+                getAdapter().unregisterAdapterDataObserver(dataObserver);
+                getAdapter().onDetachedFromRecyclerView(this);
+            }
+            super.setAdapter(adapter);
+            if (getAdapter() != null) {
+                getAdapter().registerAdapterDataObserver(dataObserver);
+                getAdapter().onAttachedToRecyclerView(this);
+            }
+        } else {
+            super.setAdapter(adapter);
         }
     }
 
@@ -131,7 +162,7 @@ public class TVRecyclerView extends RecyclerView {
             case KeyEvent.ACTION_DOWN:
                 switch (event.getKeyCode()) {
                     case KeyEvent.KEYCODE_DPAD_UP:
-                        if (isLastTopItemHandKey) {
+                        if (isHandLastUpKey) {
                             nextFocusView = FocusFinder.getInstance().findNextFocus(this, findFocus(), FOCUS_UP);
                             if (nextFocusView == null) {
                                 Toast.makeText(getContext(), "拦截up", Toast.LENGTH_SHORT).show();
@@ -140,7 +171,7 @@ public class TVRecyclerView extends RecyclerView {
                         }
                         break;
                     case KeyEvent.KEYCODE_DPAD_DOWN:
-                        if (isLastBottomItemHandKey) {
+                        if (isHandLastDownKey) {
                             nextFocusView = FocusFinder.getInstance().findNextFocus(this, findFocus(), FOCUS_DOWN);
                             if (nextFocusView == null) {
                                 Toast.makeText(getContext(), "拦截down", Toast.LENGTH_SHORT).show();
@@ -149,7 +180,7 @@ public class TVRecyclerView extends RecyclerView {
                         }
                         break;
                     case KeyEvent.KEYCODE_DPAD_RIGHT:
-                        if (isLastRightItemHandKey) {
+                        if (isHandLastRightKey) {
                             nextFocusView = FocusFinder.getInstance().findNextFocus(this, findFocus(), FOCUS_RIGHT);
                             if (nextFocusView == null) {
                                 Toast.makeText(getContext(), "拦截right", Toast.LENGTH_SHORT).show();
@@ -158,7 +189,7 @@ public class TVRecyclerView extends RecyclerView {
                         }
                         break;
                     case KeyEvent.KEYCODE_DPAD_LEFT:
-                        if (isLastLeftItemHandKey) {
+                        if (isHandLastLeftKey) {
                             nextFocusView = FocusFinder.getInstance().findNextFocus(this, findFocus(), FOCUS_LEFT);
                             if (nextFocusView == null) {
                                 Toast.makeText(getContext(), "拦截left", Toast.LENGTH_SHORT).show();
@@ -174,18 +205,21 @@ public class TVRecyclerView extends RecyclerView {
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        Log.d(TAG, "dispatchDraw1:" + currentFocusedChildPosition);
-        if (mFocusViewItem != null) {
-            int count = getChildCount();
-            for (int i = 0; i < count; i++) {
-                View child = getChildAt(i);
-                if (mFocusViewItem == child) {
-                    currentFocusedChildPosition = i;
-                    break;
+        if (isChildrenDrawingOrderEnabled()) {
+            Log.d(TAG, "dispatchDraw1:" + currentFocusedChildPosition);
+            if (mFocusViewItem != null && mFocusViewItem.get() != null) {
+                View focusViewItem = mFocusViewItem.get();
+                int count = getChildCount();
+                for (int i = 0; i < count; i++) {
+                    View child = getChildAt(i);
+                    if (focusViewItem == child) {
+                        currentFocusedChildPosition = i;
+                        break;
+                    }
                 }
+            } else {
+                currentFocusedChildPosition = 0;
             }
-        } else {
-            currentFocusedChildPosition = 0;
         }
 
         super.dispatchDraw(canvas);
@@ -194,11 +228,16 @@ public class TVRecyclerView extends RecyclerView {
         // * 当child绘制完成后，在判断是否加载更多
         // */
         // checkIsLoadMore();
-        if (nofityFocusView != null && !nofityFocusView.isFocused()) {
-            setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
-            FocusEffectViewUtil.setFocusEffectVisible(this, true);
-            nofityFocusView.requestFocus();
-            nofityFocusView = null;
+        if (nofityFocusView != null) {
+            View notifyView = nofityFocusView.get();
+            if (notifyView != null && !notifyView.isFocused()) {
+                isNotifyData = false;
+                setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
+//                FocusEffectViewUtil.setFocusEffectVisible(this, true);
+                notifyView.requestFocus();
+                nofityFocusView = null;
+            }
+
         }
 
     }
@@ -207,16 +246,10 @@ public class TVRecyclerView extends RecyclerView {
     public void requestChildFocus(View child, View focused) {
         Log.d(TAG, "requestChildFocus1:" + child.toString() + "  " + focused.toString());
 
-        if (child.getTag() != null) {
-            Log.d(TAG, "requestChildFocus1    tag:" + child.getTag().toString());
-        }
-        boolean isNotEdge;
-        mFocusViewItem = child;
+        boolean isNotEdge = false;
         if (child != focused) {
             isNotEdge = true;
-            if (mFocusRect == null) {
-                mFocusRect = new Rect();
-            }
+
             /**
              * 解决多层嵌套
              */
@@ -230,20 +263,35 @@ public class TVRecyclerView extends RecyclerView {
             }
             child.postInvalidate();
 
-            focused.getDrawingRect(mFocusRect);
-            offsetDescendantRectToMyCoords(focused, mFocusRect);
-            offsetRectIntoDescendantCoords(child, mFocusRect);
-            Log.d(TAG, "requestChildFocus1：" + mFocusRect.toString());
+            if (isNeedNotifyData) {
+                if (mFocusRect == null) {
+                    mFocusRect = new Rect();
+                }
+
+                focused.getDrawingRect(mFocusRect);
+                offsetDescendantRectToMyCoords(focused, mFocusRect);
+                offsetRectIntoDescendantCoords(child, mFocusRect);
+                Log.d(TAG, "requestChildFocus1：" + mFocusRect.toString());
+            }
         } else {
             mFocusRect = null;
-            isNotEdge = isNotTheEdgeView(mFocusViewItem);
+            if (isChildrenDrawingOrderEnabled()) {
+                isNotEdge = isNotTheEdgeView(child);
+            }
         }
         super.requestChildFocus(child, focused);
         Log.d(TAG, "requestChildFocus2");
-        if (isNotEdge) {
+        if (isNeedNotifyData) {
+            if (mFocusViewItem != null) {
+                mFocusViewItem.clear();
+                mFocusViewItem = null;
+            }
+            mFocusViewItem = new WeakReference<View>(child);
+            currentFocusedItemPosition = getChildAdapterPosition(child);
+        }
+        if (isNotEdge && isChildrenDrawingOrderEnabled()) {
             postInvalidate();
         }
-        currentFocusedItemPosition = getChildAdapterPosition(mFocusViewItem);
     }
 
     /**
@@ -276,8 +324,7 @@ public class TVRecyclerView extends RecyclerView {
 
     @Override
     protected int getChildDrawingOrder(int childCount, int i) {
-        // Log.d(TAG, "getChildDrawingOrder:" + currentFocusedChildPosition + "
-        // " + childCount);
+        Log.d(TAG,"getChildDrawingOrder");
         if (i == currentFocusedChildPosition) {
             return childCount - 1;
         } else if (i == childCount - 1) {
@@ -294,7 +341,7 @@ public class TVRecyclerView extends RecyclerView {
         /**
          * 滑动的过程中更新焦点效果view的位置
          */
-        FocusEffectViewUtil.updateFocusEffect(this);
+//        FocusEffectViewUtil.updateFocusEffect(this);
     }
 
     @Override
@@ -306,6 +353,12 @@ public class TVRecyclerView extends RecyclerView {
         }
     }
 
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        Log.d(TAG, "onScrollChanged");
+    }
+
     /**
      * 判断是否要
      */
@@ -313,19 +366,6 @@ public class TVRecyclerView extends RecyclerView {
         if (onLoadMoreListener != null) {
             LayoutManager layoutManager = getLayoutManager();
             if (layoutManager != null) {
-                /*
-                 * if (layoutManager instanceof GridLayoutManager) {
-				 * GridLayoutManager gridLayoutManager = (GridLayoutManager)
-				 * layoutManager; int lastPosition =
-				 * gridLayoutManager.findLastVisibleItemPosition(); int count =
-				 * gridLayoutManager.getItemCount() - 1; Log.d(TAG,
-				 * "checkIsLoadMore--GridLayoutManager:" + lastPosition + "" +
-				 * count); if (gridLayoutManager.findLastVisibleItemPosition()
-				 * == (gridLayoutManager.getItemCount() - 1) &&
-				 * isLoadMoreComplete && onLoadMoreListener != null) {
-				 * isLoadMoreComplete = false; onLoadMoreListener.onLoadMore();
-				 * } } else
-				 */
                 if (layoutManager instanceof LinearLayoutManager) {
                     LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
                     Log.d(TAG, "checkIsLoadMore:" + linearLayoutManager.findLastVisibleItemPosition() + "  " + linearLayoutManager.getItemCount());
@@ -336,13 +376,6 @@ public class TVRecyclerView extends RecyclerView {
                 } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                     StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
                     // TODO: 17/1/4
-                    // if
-                    // (staggeredGridLayoutManager.findLastVisibleItemPositions(null)
-                    // == (staggeredGridLayoutManager.getItemCount() - 1) &&
-                    // isLoadMoreComplete && onLoadMoreListener != null) {
-                    // isLoadMoreComplete = false;
-                    // onLoadMoreListener.onLoadMore();
-                    // }
                 }
             }
         }
@@ -419,51 +452,37 @@ public class TVRecyclerView extends RecyclerView {
      * @param bottom 屏幕下边
      */
     public void setLastLineItemHandKey(boolean left, boolean top, boolean right, boolean bottom) {
-        this.isLastLeftItemHandKey = left;
-        this.isLastTopItemHandKey = top;
-        this.isLastRightItemHandKey = right;
-        this.isLastBottomItemHandKey = bottom;
+        this.isHandLastLeftKey = left;
+        this.isHandLastUpKey = top;
+        this.isHandLastRightKey = right;
+        this.isHandLastDownKey = bottom;
     }
 
-    /**
-     * 设置最左边的view是否消耗keyevent，如果消耗，在左边的view按左键没有效果
-     *
-     * @param isHand true:消耗，左键不会响应
-     */
-    public void setLastLeftItemHandKey(boolean isHand) {
-        isLastLeftItemHandKey = isHand;
-
-    }
-
-    public void setLastRightItemHandKey(boolean isHand) {
-        isLastRightItemHandKey = isHand;
-    }
-
-    public void setLastTopItemHandKey(boolean isHand) {
-        isLastTopItemHandKey = isHand;
-    }
-
-    public void setLastBottomItemHandKey(boolean isHand) {
-        isLastBottomItemHandKey = isHand;
-    }
 
     @Override
     public void onChildAttachedToWindow(View child) {
         super.onChildAttachedToWindow(child);
-        Log.d(TAG, "onChildAttachedToWindow:");
-
-        int position = getChildAdapterPosition(child);
-        if (position == currentFocusedItemPosition) {
-            if (mFocusRect == null) {
-                // child.requestFocus();
-                nofityFocusView = child;
-            } else {
-                /**
-                 * 多层处理
-                 */
-                findFocusView(child, child);
+        if (isNotifyData && isNeedNotifyData) {
+            int position = getChildAdapterPosition(child);
+            Log.d(TAG, "onChildAttachedToWindow:" + position);
+            if (position == currentFocusedItemPosition) {
+                if (mFocusRect == null) {
+                    // child.requestFocus();
+                    if (nofityFocusView != null) {
+                        nofityFocusView.clear();
+                        nofityFocusView = null;
+                    }
+                    nofityFocusView = new WeakReference<View>(child);
+                } else {
+                    /**
+                     * 多层处理
+                     */
+                    findFocusView(child, child);
+                }
             }
+
         }
+
     }
 
     private void findFocusView(View parent, View child) {
@@ -475,7 +494,11 @@ public class TVRecyclerView extends RecyclerView {
             Log.d(TAG, "onChildAttachedToWindow：" + rect.toString());
             if (rect.contains(mFocusRect)) {
                 // viewGroup.getChildAt(i).requestFocus();
-                nofityFocusView = child;
+                if (nofityFocusView != null) {
+                    nofityFocusView.clear();
+                    nofityFocusView = null;
+                }
+                nofityFocusView = new WeakReference<View>(child);
             }
         } else if (child instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) child;
@@ -489,10 +512,19 @@ public class TVRecyclerView extends RecyclerView {
 
     @Override
     public void onChildDetachedFromWindow(View child) {
-        super.onChildDetachedFromWindow(child);
         Log.d(TAG, "onChildDetachedFromWindow:");
+        if (mFocusViewItem != null && child == mFocusViewItem.get()) {
+            mFocusViewItem.clear();
+            mFocusViewItem = null;
+        }
+        super.onChildDetachedFromWindow(child);
     }
 
+    @Override
+    public void smoothScrollToPosition(int position) {
+        super.smoothScrollToPosition(position);
+        onDataChanged();
+    }
 
     private class RVDataObservable extends AdapterDataObserver {
 
@@ -530,7 +562,8 @@ public class TVRecyclerView extends RecyclerView {
 
     protected void onDataChanged() {
         Log.e(TAG, "onDataChanged");
-        FocusEffectViewUtil.setFocusEffectVisible(this, false);
+        isNotifyData = true;
+//        FocusEffectViewUtil.setFocusEffectVisible(this, false);
         setDescendantFocusability(FOCUS_BEFORE_DESCENDANTS);
         this.requestFocus();
     }

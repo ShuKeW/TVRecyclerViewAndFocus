@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skw.library.R;
+import com.skw.library.TVRecyclerView;
 
 /**
  * @创建人 weishukai
@@ -13,6 +14,7 @@ import com.skw.library.R;
  */
 
 public abstract class RVHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnFocusChangeListener {
+	protected RecyclerView recyclerView;
 
 	public RVHolder(View itemView) {
 		super(itemView);
@@ -44,6 +46,14 @@ public abstract class RVHolder<T> extends RecyclerView.ViewHolder implements Vie
 		view.setTag(R.id.focus_type, focusViewType);
 		view.setTag(R.id.focus_type_is_scale_anim, isFocusScaleAnim);
 		view.setTag(R.id.focus_type_is_translate, isTranslateAnim);
+	}
+
+	public RecyclerView getRecyclerView() {
+		return recyclerView;
+	}
+
+	public void setRecyclerView(RecyclerView recyclerView) {
+		this.recyclerView = recyclerView;
 	}
 
 	public abstract void bindData(T model, int position);
