@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity {
 
 	private RelativeLayout				tabContent;
 
-	private int[]						tabIds	= new int[] { R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4, R.id.tab5 };
+	private int[]						tabIds	= new int[] { R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4, R.id.tab5 , R.id.tab6 };
 
 	private List<TextView>				tabs	= new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity {
 		viewPager = (ViewPagerContainsHScorll) findViewById(R.id.viewPager);
 		VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(vpAdapter);
-		viewPager.setOffscreenPageLimit(4);
+		viewPager.setOffscreenPageLimit(5);
 		tabContent = (RelativeLayout) findViewById(R.id.tabContent);
 		tabContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 

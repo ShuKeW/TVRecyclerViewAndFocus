@@ -9,6 +9,7 @@ import com.skw.TVRecyclerViewAndFocus.fragment.GridListFragment;
 import com.skw.TVRecyclerViewAndFocus.fragment.GridListMiddleFocusFragment;
 import com.skw.TVRecyclerViewAndFocus.fragment.GridPageFragment;
 import com.skw.TVRecyclerViewAndFocus.fragment.LinearListFragment;
+import com.skw.TVRecyclerViewAndFocus.fragment.LinearListHeaderFocusFragment;
 
 /**
  * @创建人 weishukai
@@ -34,11 +35,13 @@ public class VPAdapter extends FragmentPagerAdapter {
 				return new GridListDiffSpanFragment();
 			case 4:
 				return new GridListMiddleFocusFragment();
+			case 5:
+				return new LinearListHeaderFocusFragment();
 		}
 		return null;
 	}
 
 	@Override public int getCount() {
-		return 5;
+		return 6;
 	}
 }

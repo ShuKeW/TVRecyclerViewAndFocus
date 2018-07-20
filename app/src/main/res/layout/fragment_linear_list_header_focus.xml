@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tvrecyclerview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.skw.library.TVRecyclerViewHeaderFocus
+        android:id="@+id/recyclerview_linear_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_62px"
+        android:layout_marginRight="@dimen/dp_62px"
+        android:background="@color/color_ffffff"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/dp_28px"
+        android:paddingLeft="@dimen/dp_120px"
+        android:paddingRight="@dimen/dp_120px"
+        android:paddingTop="@dimen/dp_28px"
+        tvrecyclerview:drawChildOrderEnable="true"
+        tvrecyclerview:handLastDownKey="false"
+        tvrecyclerview:handLastLeftKey="true"
+        tvrecyclerview:handLastRightKey="true"
+        tvrecyclerview:handLastUpKey="false"
+        tvrecyclerview:isNeedNotifyData="true">
+
+    </com.skw.library.TVRecyclerViewHeaderFocus>
+</FrameLayout>
