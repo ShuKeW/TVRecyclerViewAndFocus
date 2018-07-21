@@ -21,7 +21,7 @@ public class FocusEffectView extends AbsFocusEffectView {
 
 	private String		TAG				= "FocusEffectView";
 
-	private final float	scale			= 1.145f;
+	public static final float	scale			= 1.145f;
 
 	private final long	scaleDuration	= 200;
 

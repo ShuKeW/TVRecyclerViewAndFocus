@@ -51,7 +51,7 @@ public class TVRecyclerViewMiddleFocus extends TVRecyclerView {
                     }
                 } else if (layoutManager.canScrollVertically()) {
                     if ((linearLayoutManager.findFirstVisibleItemPosition() == 0 && rectFocus.top < getHeight() / 2)
-                            || (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (linearLayoutManager.getItemCount() - 1) && (rectFocus.bottom - rectFocus.width() / 2) >= getHeight() / 2)
+                            || (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (linearLayoutManager.getItemCount() - 1) && (rectFocus.bottom - rectFocus.height() / 2) >= getHeight() / 2)
                             || (linearLayoutManager.findLastVisibleItemPosition() == (linearLayoutManager.getItemCount() - 1) && rectFocus.top > getHeight() / 2)) {
                         return super.requestChildRectangleOnScreen(child, rect, immediate);
                     }
@@ -67,7 +67,7 @@ public class TVRecyclerViewMiddleFocus extends TVRecyclerView {
         if (getLayoutManager().canScrollHorizontally()) {
             dx = rectFocus.left - (getWidth() - rectFocus.width()) / 2;
         } else if (getLayoutManager().canScrollVertically()) {
-            dy = rectFocus.top - (getHeight() - rectFocus.height() / 2);
+            dy = rectFocus.bottom - rectFocus.height() / 2 - getHeight() / 2;
         }
         if (immediate) {
             scrollBy(dx, dy);

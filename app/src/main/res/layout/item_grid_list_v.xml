@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FocusStyle"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_228px">
+    android:layout_height="@dimen/dp_120px">
 
     <ImageView
         android:id="@+id/recommend_img"

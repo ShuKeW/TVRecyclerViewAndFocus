@@ -31,83 +31,91 @@ import java.util.List;
 
 public class GridListMiddleFocusFragment extends Fragment implements TVRecyclerView.OnLoadMoreListener {
 
-	private String					TAG			= "MiddleFocusFragment";
+    private String TAG = "MiddleFocusFragment";
 
-	private TVRecyclerViewMiddleFocus recyclerView;
+    private TVRecyclerViewMiddleFocus recyclerView;
 
-	private GridLayoutManager		gridLayoutManager;
+    private GridLayoutManager gridLayoutManager;
 
-	private GridListHRVAdapter		rvAdapter;
+    private GridListHRVAdapter rvAdapter;
 
-	private List<RecommendModel>	data		= new ArrayList<>();
+    private List<RecommendModel> data = new ArrayList<>();
 
-	private int						pageCount	= 100, pageNumber;
+    private int pageCount = 100, pageNumber;
 
-	@Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		Log.d(TAG, "onCreateView");
-		View view = inflater.inflate(R.layout.fragment_middle_focus, container, false);
-		initView(view);
-		return view;
-	}
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
+        View view = inflater.inflate(R.layout.fragment_middle_focus, container, false);
+        initView(view);
+        return view;
+    }
 
-	private void initView(View view) {
-		recyclerView = (TVRecyclerViewMiddleFocus) view.findViewById(R.id.recyclerview_middle_focus);
-		recyclerView.setHasFixedSize(true);
-		recyclerView.setLastLineItemHandKey(true, false, true, false);
-		gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4, LinearLayoutManager.HORIZONTAL, false);
-		recyclerView.setLayoutManager(gridLayoutManager);
-		recyclerView.setOnLoadMoreListener(this);
-		recyclerView.addItemDecoration(new DividerGridItemDecoration(Color.GRAY, 20, 20, Color.GREEN, 20));
-		pageNumber = 0;
-		createData(pageNumber);
-	}
+    private void initView(View view) {
+        recyclerView = (TVRecyclerViewMiddleFocus) view.findViewById(R.id.recyclerview_middle_focus);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLastLineItemHandKey(true, false, true, false);
+        gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setOnLoadMoreListener(this);
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(Color.GRAY, 20, 20, Color.GREEN, 20));
+        pageNumber = 0;
+        createData(pageNumber);
+    }
 
-	@Override public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Log.d(TAG, "onCreate");
-	}
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
+    }
 
-	@Override public void onAttach(Context context) {
-		super.onAttach(context);
-		Log.d(TAG, "onAttach");
-	}
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach");
+    }
 
-	@Override public void setUserVisibleHint(boolean isVisibleToUser) {
-		super.setUserVisibleHint(isVisibleToUser);
-		Log.d(TAG, "setUserVisibleHint:" + isVisibleToUser);
-	}
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, "setUserVisibleHint:" + isVisibleToUser);
+    }
 
-	private void createData(int pageNumber) {
-		Log.d(TAG, "createData:" + pageNumber);
-		RecommendModel model;
-		for (int i = pageNumber * pageCount; i < (pageNumber + 1) * pageCount; i++) {
-			model = new RecommendModel();
-			model.title = "" + i;
-			model.imgResColor = getResources().getColor(R.color.color_0b83ef);
-			data.add(model);
-		}
-		if (rvAdapter == null) {
-			rvAdapter = new GridListHRVAdapter(getActivity().getApplicationContext(), data);
-			recyclerView.setAdapter(rvAdapter);
-		} else {
-			recyclerView.setLoadMoreComplete();
-			rvAdapter.notifyDataSetChanged();
-		}
-	}
+    private void createData(int pageNumber) {
+        Log.d(TAG, "createData:" + pageNumber);
+        RecommendModel model;
+        for (int i = pageNumber * pageCount; i < (pageNumber + 1) * pageCount; i++) {
+            model = new RecommendModel();
+            model.title = "" + i;
+            model.imgResColor = getResources().getColor(R.color.color_0b83ef);
+            data.add(model);
+        }
+        if (rvAdapter == null) {
+            rvAdapter = new GridListHRVAdapter(getActivity().getApplicationContext(), data);
+            recyclerView.setAdapter(rvAdapter);
+        } else {
+            recyclerView.setLoadMoreComplete();
+            rvAdapter.notifyDataSetChanged();
+        }
+    }
 
-	@Override public void onLoadMore() {
-		Toast.makeText(getContext(), "翻页。。。", Toast.LENGTH_SHORT).show();
-		pageNumber++;
-		// createData(pageNumber);
-	}
+    @Override
+    public void onLoadMore() {
+        Toast.makeText(getContext(), "翻页。。。", Toast.LENGTH_SHORT).show();
+        pageNumber++;
+        // createData(pageNumber);
+    }
 
-	@Override public void onDestroyView() {
-		super.onDestroyView();
-		Log.d(TAG, "onDestroyView");
-	}
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
+    }
 
-	@Override public void onDestroy() {
-		super.onDestroy();
-		Log.d(TAG, "onDestroy");
-	}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+    }
 }
